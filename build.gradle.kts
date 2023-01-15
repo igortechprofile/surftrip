@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
 	id("org.springframework.boot") version "3.0.1"
@@ -6,6 +7,15 @@ plugins {
 	kotlin("jvm") version "1.7.22"
 	kotlin("plugin.spring") version "1.7.22"
 }
+
+//sourceSets {
+//	main {
+//		java.srcDir("src/main/kotlin")
+//	}
+//	test {
+//		java.srcDir("src/test/kotlin")
+//	}
+//}
 
 group = "com.styazhkin"
 version = "0.0.1-SNAPSHOT"
@@ -33,3 +43,30 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
+
+tasks.getByName<Jar>("jar") {
+	enabled = false
+}
+//tasks.withType<Jar>{
+//	manifest {
+//		attributes["Main-Class"] = "com.styazhkin.surftrip.SurftripApplicationKt"
+//	}
+//}
+
+//tasks.withType<org.gradle.jvm.tasks.Jar> {
+//	enabled = true
+//	includeEmptyDirs = false
+//	manifest {
+//		attributes(
+//			mapOf(
+//				"Implementation-Title" to project.description,
+//				"Implementation-Version" to project.version,
+//				"Main-Class" to "com.styazhkin.surftrip.SurftripApplicationKt"
+//			)
+//		)
+//	}
+//	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+//	from({
+//		configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
+//	})
+//}
